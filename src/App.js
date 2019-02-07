@@ -11,7 +11,13 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-   
+
+        <or>
+          <li>Fetch Data from a public API</li>
+          <li>Display data from API onto your page (Table, List, etc.)</li>
+          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
+        </or>   
+       
         </header>
       </div>
     );
