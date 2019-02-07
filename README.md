@@ -1,5 +1,4 @@
 # Tech Interview Project
-Boilerplate Project for Tech Interviews
 
 ## Steps to get started:
 
