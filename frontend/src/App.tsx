@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './lib/queryClient'
+import EmployeeTable from './components/employee-table/EmployeeTable'
 
 const App = () => {
 
@@ -10,6 +11,8 @@ const App = () => {
         <Typography variant="h4" gutterBottom>
           Employee Overview
         </Typography>
+
+        <EmployeeTable /> 
       </Container>
     </QueryClientProvider>
   )
