@@ -59,7 +59,7 @@ const PageHeader = () => {
           <Tooltip
             title={`Switch to ${mode === "light" ? "dark" : "light"} mode`}
           >
-            <IconButton onClick={toggleTheme}>
+            <IconButton onClick={toggleTheme} sx={{ color: "white" }}>
               {mode === "light" ? <Brightness4 /> : <LightMode />}
             </IconButton>
           </Tooltip>
