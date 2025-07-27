@@ -90,6 +90,26 @@ const baseTheme: ThemeOptions = {
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+           color: "white",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+            },
+        },
+        sizeSmall: {
+          padding: 6,
+        },
+        sizeMedium: {
+          padding: 8,
+        },
+        sizeLarge: {
+          padding: 10,
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
