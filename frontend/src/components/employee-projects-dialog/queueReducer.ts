@@ -1,10 +1,7 @@
-import { EmployeeProject } from "@/types/EmployeeProject";
+import { LocalProject } from "@/types/LocalProject";
 
-export interface LocalAdd extends Omit<EmployeeProject, "id"> {
-  tmpId: string;
-}
 export interface QueueState {
-  queuedAdds: LocalAdd[];
+  queuedAdds: LocalProject[];
   queuedDeletes: string[];
 }
 
@@ -12,7 +9,7 @@ export const initialState: QueueState = { queuedAdds: [], queuedDeletes: [] };
 
 export type QueueAction =
   | { type: "reset" }
-  | { type: "queueAdd"; payload: LocalAdd }
+  | { type: "queueAdd"; payload: LocalProject }
   | { type: "removeQueuedAdd"; tmpId: string }
   | { type: "toggleDelete"; id: string };
 
