@@ -9,10 +9,8 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-
 import type { Employee } from "@/types/Employee";
 import type { Project } from "@/types/Project";
-
 import { useEmployeeProjectDialog } from "./hooks/useEmployeeProjectDialog";
 import { RowItem } from "@/types/RowItem";
 import ProjectItem from "./ProjectItem";
