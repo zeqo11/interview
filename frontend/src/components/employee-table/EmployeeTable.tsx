@@ -8,9 +8,14 @@ import {
   Stack,
   Tooltip,
   Typography,
+  Chip,
+  useTheme,
 } from "@mui/material";
-import RoomIcon from "@mui/icons-material/Room";
-import PersonIcon from "@mui/icons-material/Person";
+import {
+  Room as RoomIcon,
+  Work as WorkIcon,
+  CalendarToday as CalendarIcon,
+} from "@mui/icons-material";
 import type { Employee } from "@/types/Employee";
 import Table, { Column } from "@/common/Table";
 import { useEmployees } from "@/api/useEmployees";
@@ -19,6 +24,7 @@ import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjects
 
 const EmployeeTable = () => {
   const { data: employees, isLoading } = useEmployees();
+  const theme = useTheme();
 
   const [selectedEmp, setSelectedEmp] = useState<Employee | null>(null);
   const open = !!selectedEmp;
@@ -29,40 +35,102 @@ const EmployeeTable = () => {
       header: "Employee",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Avatar>
-            <PersonIcon />
+          <Avatar
+            sx={{
+              background: theme.custom.gradients.primary,
+              width: 48,
+              height: 48,
+              fontSize: "1.2rem",
+              fontWeight: 600,
+            }}
+          >
+            {e.firstName[0]}
+            {e.lastName[0]}
           </Avatar>
-          <Typography>
-            {e.firstName} {e.lastName}
-          </Typography>
+          <Box>
+            <Typography variant="body1" fontWeight={600}>
+              {e.firstName} {e.lastName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Employee ID: {e.id}
+            </Typography>
+          </Box>
         </Stack>
       ),
     },
-    { header: "Birth Year", cell: (e) => e.birthYear, align: "center" },
-    { header: "Department", cell: (e) => e.department },
+    {
+      header: "Birth Year",
+      cell: (e) => (
+        <Chip
+          label={e.birthYear}
+          size="small"
+          variant="outlined"
+          sx={{ fontWeight: 500 }}
+        />
+      ),
+      align: "center",
+    },
+    {
+      header: "Department",
+      cell: (e) => (
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <WorkIcon fontSize="small" color="primary" />
+          <Typography fontWeight={500}>{e.department}</Typography>
+        </Stack>
+      ),
+    },
     {
       header: "Office Location",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
-          <RoomIcon fontSize="small" color="action" />
+          <RoomIcon fontSize="small" color="secondary" />
           <Typography>{e.officeLocation}</Typography>
         </Stack>
       ),
     },
     {
       header: "Start Date",
-      cell: (e) => new Date(e.startDate).toLocaleDateString(),
+      cell: (e) => (
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <CalendarIcon fontSize="small" color="action" />
+          <Typography>{new Date(e.startDate).toLocaleDateString()}</Typography>
+        </Stack>
+      ),
       align: "center",
     },
     {
       header: "Remaining Leave",
-      cell: (e) => e.remainingLeaves,
+      cell: (e) => (
+        <Chip
+          label={`${e.remainingLeaves} days`}
+          size="small"
+          color={
+            e.remainingLeaves > 10
+              ? "success"
+              : e.remainingLeaves > 5
+              ? "warning"
+              : "error"
+          }
+          sx={{ fontWeight: 500 }}
+        />
+      ),
       align: "center",
     },
     {
       header: "Salary",
-      cell: (e) =>
-        `${e.salary.currency}${e.salary.amount.toLocaleString("tr-TR")}`,
+      cell: (e) => (
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={1}
+          justifyContent="flex-end"
+        >
+          <Typography fontWeight={600} color="primary.main">
+            {e.salary.currency}
+            {e.salary.amount.toLocaleString("tr-TR")}
+          </Typography>
+        </Stack>
+      ),
       align: "right",
     },
     {
@@ -70,7 +138,7 @@ const EmployeeTable = () => {
       align: "center",
       cell: (e) =>
         e.dependents.length ? (
-          <AvatarGroup max={4} sx={{ justifyContent: "center" }}>
+          <AvatarGroup max={4}>
             {e.dependents.map((d) => (
               <Tooltip key={d.id} title={formatDisplayName(d)}>
                 <Avatar>
@@ -81,9 +149,12 @@ const EmployeeTable = () => {
             ))}
           </AvatarGroup>
         ) : (
-          <Typography variant="body2" color="text.secondary">
-            —
-          </Typography>
+          <Chip
+            label="No dependents"
+            size="small"
+            variant="outlined"
+            color="default"
+          />
         ),
     },
     {
@@ -92,7 +163,7 @@ const EmployeeTable = () => {
       cell: (e) => (
         <Button
           size="small"
-          variant="outlined"
+          variant="contained"
           onClick={() => setSelectedEmp(e)}
         >
           Manage Projects
@@ -103,8 +174,28 @@ const EmployeeTable = () => {
 
   if (isLoading) {
     return (
-      <Box display="flex" justifyContent="center" mt={4}>
-        <CircularProgress />
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        py={8}
+        sx={{
+          background: theme.palette.background.paper,
+          borderRadius: 2,
+          border: `1px solid ${theme.palette.divider}`,
+        }}
+      >
+        <CircularProgress
+          size={48}
+          sx={{
+            color: theme.palette.primary.main,
+            mb: 2,
+          }}
+        />
+        <Typography variant="body2" color="text.secondary">
+          Loading employee data...
+        </Typography>
       </Box>
     );
   }

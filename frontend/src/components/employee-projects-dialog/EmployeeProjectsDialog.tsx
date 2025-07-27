@@ -6,21 +6,18 @@ import {
   DialogActions,
   Stack,
   Typography,
-  Chip,
-  IconButton,
   Button,
-  TextField,
-  Autocomplete,
   CircularProgress,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 
 import type { Employee } from "@/types/Employee";
 import type { Project } from "@/types/Project";
 
 import { useEmployeeProjectDialog } from "./hooks/useEmployeeProjectDialog";
 import { RowItem } from "@/types/RowItem";
+import ProjectItem from "./ProjectItem";
+import EmptyProjectsState from "./EmptyProjectsState";
+import AddProjectForm from "./AddProjectForm";
 
 interface Props {
   open: boolean;
@@ -69,7 +66,7 @@ const EmployeeProjectsDialog: FC<Props> = ({
       open={open}
       onClose={doItAllOnce ? onClose : handleSave}
       keepMounted={false}
-      maxWidth="sm"
+      maxWidth="md"
       fullWidth
     >
       <DialogTitle>
@@ -82,74 +79,28 @@ const EmployeeProjectsDialog: FC<Props> = ({
           <CircularProgress />
         ) : (
           <Stack spacing={2}>
-            {rows.length === 0 && (
-              <Typography color="text.secondary">
-                No projects assigned.
-              </Typography>
-            )}
+            {rows.length === 0 && <EmptyProjectsState />}
 
             {rows.map((row: RowItem) => (
-              <Stack
+              <ProjectItem
                 key={row.id}
-                direction="row"
-                spacing={2}
-                alignItems="center"
-              >
-                <Chip label={row.projectName} color="primary" size="small" />
-
-                <Typography variant="body2" color="text.secondary" flexGrow={1}>
-                  {row.role}
-                </Typography>
-
-                <IconButton
-                  size="small"
-                  aria-label="remove project"
-                  onClick={() => removeOrDelete(row)}
-                  disabled={delPending && !row.queued}
-                >
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
-              </Stack>
+                row={row}
+                queuedAdds={queuedAdds}
+                onRemove={removeOrDelete}
+                delPending={delPending}
+              />
             ))}
 
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              pt={2}
-              alignItems="flex-start"
-            >
-              <Autocomplete<Project>
-                options={unassignedProjects}
-                getOptionLabel={(o) => o.name}
-                value={selectedProj}
-                onChange={(_, v) => setSelectedProj(v)}
-                sx={{ minWidth: 160, flex: 1 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Project" size="small" />
-                )}
-              />
-              <TextField
-                label="Role"
-                size="small"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                sx={{ flex: 1 }}
-              />
-              <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                disabled={
-                  !selectedProj || !role.trim() || (addPending && !doItAllOnce)
-                }
-                onClick={handleAdd}
-              >
-                {addPending && !doItAllOnce ? (
-                  <CircularProgress size={18} />
-                ) : (
-                  "Add"
-                )}
-              </Button>
-            </Stack>
+            <AddProjectForm
+              unassignedProjects={unassignedProjects}
+              selectedProj={selectedProj}
+              role={role}
+              addPending={addPending}
+              doItAllOnce={doItAllOnce}
+              onProjectChange={setSelectedProj}
+              onRoleChange={setRole}
+              onAdd={handleAdd}
+            />
           </Stack>
         )}
       </DialogContent>
@@ -164,9 +115,11 @@ const EmployeeProjectsDialog: FC<Props> = ({
             Pending: +{queuedAdds.length} / −{queuedDeletes.length}
           </Typography>
         )}
+        
         <Button onClick={onClose} disabled={addPending || delPending}>
           {doItAllOnce ? "Cancel" : "Close"}
         </Button>
+
         {doItAllOnce && (
           <Button
             variant="contained"
