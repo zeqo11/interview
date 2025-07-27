@@ -1,0 +1,630 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Smith",
+      "birthYear": 1988,
+      "phoneNumber": "+1‑212‑555‑0101",
+      "department": "Engineering",
+      "officeLocation": "New York",
+      "startDate": "2017-03-12",
+      "remainingLeaves": 10,
+      "salary": {
+        "amount": 105000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 1,
+          "firstName": "Lily",
+          "lastName": "Smith",
+          "birthYear": 2015,
+          "phoneNumber": "+1‑212‑555‑1101",
+          "relationship": "child"
+        },
+        {
+          "id": 2,
+          "firstName": "Max",
+          "lastName": "Smith",
+          "birthYear": 2018,
+          "phoneNumber": "+1‑212‑555‑1102",
+          "relationship": "child"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "birthYear": 1992,
+      "phoneNumber": "+1‑415‑555‑0112",
+      "department": "Marketing",
+      "officeLocation": "San Francisco",
+      "startDate": "2019-07-01",
+      "remainingLeaves": 8,
+      "salary": {
+        "amount": 87000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 3,
+          "firstName": "Grace",
+          "lastName": "Johnson",
+          "birthYear": 2020,
+          "phoneNumber": "+1‑415‑555‑1201",
+          "relationship": "child"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "firstName": "Liam",
+      "lastName": "Williams",
+      "birthYear": 1985,
+      "phoneNumber": "+1‑312‑555‑0123",
+      "department": "Finance",
+      "officeLocation": "Chicago",
+      "startDate": "2016-10-20",
+      "remainingLeaves": 12,
+      "salary": {
+        "amount": 97000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 4,
+          "firstName": "Ella",
+          "lastName": "Williams",
+          "birthYear": 2012,
+          "phoneNumber": "+1‑312‑555‑1301",
+          "relationship": "child"
+        },
+        {
+          "id": 5,
+          "firstName": "Jack",
+          "lastName": "Williams",
+          "birthYear": 2014,
+          "phoneNumber": "+1‑312‑555‑1302",
+          "relationship": "child"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "firstName": "Olivia",
+      "lastName": "Brown",
+      "birthYear": 1994,
+      "phoneNumber": "+1‑512‑555‑0144",
+      "department": "Design",
+      "officeLocation": "Austin",
+      "startDate": "2020-01-15",
+      "remainingLeaves": 9,
+      "salary": {
+        "amount": 79000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "5",
+      "firstName": "Noah",
+      "lastName": "Jones",
+      "birthYear": 1990,
+      "phoneNumber": "+1‑213‑555‑0155",
+      "department": "Sales",
+      "officeLocation": "Los Angeles",
+      "startDate": "2018-05-05",
+      "remainingLeaves": 11,
+      "salary": {
+        "amount": 83000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 6,
+          "firstName": "Noel",
+          "lastName": "Jones",
+          "birthYear": 2016,
+          "phoneNumber": "+1‑213‑555‑1501",
+          "relationship": "child"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "firstName": "Ava",
+      "lastName": "Garcia",
+      "birthYear": 1987,
+      "phoneNumber": "+1‑617‑555‑0166",
+      "department": "HR",
+      "officeLocation": "Boston",
+      "startDate": "2015-09-14",
+      "remainingLeaves": 13,
+      "salary": {
+        "amount": 78000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 7,
+          "firstName": "Maya",
+          "lastName": "Garcia",
+          "birthYear": 2013,
+          "phoneNumber": "+1‑617‑555‑1601",
+          "relationship": "child"
+        },
+        {
+          "id": 8,
+          "firstName": "Leo",
+          "lastName": "Garcia",
+          "birthYear": 2017,
+          "phoneNumber": "+1‑617‑555‑1602",
+          "relationship": "child"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "firstName": "William",
+      "lastName": "Martinez",
+      "birthYear": 1991,
+      "phoneNumber": "+1‑206‑555‑0177",
+      "department": "Engineering",
+      "officeLocation": "Seattle",
+      "startDate": "2021-02-10",
+      "remainingLeaves": 7,
+      "salary": {
+        "amount": 98000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "8",
+      "firstName": "Sophia",
+      "lastName": "Davis",
+      "birthYear": 1993,
+      "phoneNumber": "+1‑303‑555‑0188",
+      "department": "Product",
+      "officeLocation": "Denver",
+      "startDate": "2019-11-30",
+      "remainingLeaves": 6,
+      "salary": {
+        "amount": 91000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "9",
+      "firstName": "James",
+      "lastName": "Rodriguez",
+      "birthYear": 1984,
+      "phoneNumber": "+1‑305‑555‑0199",
+      "department": "Finance",
+      "officeLocation": "Miami",
+      "startDate": "2016-04-22",
+      "remainingLeaves": 14,
+      "salary": {
+        "amount": 99000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "10",
+      "firstName": "Isabella",
+      "lastName": "Wilson",
+      "birthYear": 1995,
+      "phoneNumber": "+1‑646‑555‑0200",
+      "department": "Design",
+      "officeLocation": "New York",
+      "startDate": "2022-06-18",
+      "remainingLeaves": 9,
+      "salary": {
+        "amount": 76000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "11",
+      "firstName": "Benjamin",
+      "lastName": "Anderson",
+      "birthYear": 1989,
+      "phoneNumber": "+1‑415‑555‑0211",
+      "department": "Engineering",
+      "officeLocation": "San Francisco",
+      "startDate": "2017-12-03",
+      "remainingLeaves": 10,
+      "salary": {
+        "amount": 110000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "12",
+      "firstName": "Mia",
+      "lastName": "Thomas",
+      "birthYear": 1996,
+      "phoneNumber": "+1‑312‑555‑0222",
+      "department": "Marketing",
+      "officeLocation": "Chicago",
+      "startDate": "2021-08-27",
+      "remainingLeaves": 8,
+      "salary": {
+        "amount": 84000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "13",
+      "firstName": "Alexander",
+      "lastName": "Taylor",
+      "birthYear": 1986,
+      "phoneNumber": "+1‑206‑555‑0233",
+      "department": "Sales",
+      "officeLocation": "Seattle",
+      "startDate": "2015-01-09",
+      "remainingLeaves": 12,
+      "salary": {
+        "amount": 88000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "14",
+      "firstName": "Charlotte",
+      "lastName": "Moore",
+      "birthYear": 1993,
+      "phoneNumber": "+1‑512‑555‑0244",
+      "department": "Product",
+      "officeLocation": "Austin",
+      "startDate": "2020-03-25",
+      "remainingLeaves": 7,
+      "salary": {
+        "amount": 82000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "15",
+      "firstName": "Daniel",
+      "lastName": "Jackson",
+      "birthYear": 1983,
+      "phoneNumber": "+1‑617‑555‑0255",
+      "department": "Finance",
+      "officeLocation": "Boston",
+      "startDate": "2014-07-11",
+      "remainingLeaves": 15,
+      "salary": {
+        "amount": 102000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "16",
+      "firstName": "Amelia",
+      "lastName": "White",
+      "birthYear": 1992,
+      "phoneNumber": "+1‑303‑555‑0266",
+      "department": "HR",
+      "officeLocation": "Denver",
+      "startDate": "2018-10-19",
+      "remainingLeaves": 11,
+      "salary": {
+        "amount": 75000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "17",
+      "firstName": "Henry",
+      "lastName": "Harris",
+      "birthYear": 1987,
+      "phoneNumber": "+1‑213‑555‑0277",
+      "department": "Engineering",
+      "officeLocation": "Los Angeles",
+      "startDate": "2016-02-28",
+      "remainingLeaves": 13,
+      "salary": {
+        "amount": 107000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "18",
+      "firstName": "Evelyn",
+      "lastName": "Clark",
+      "birthYear": 1994,
+      "phoneNumber": "+1‑305‑555‑0288",
+      "department": "Design",
+      "officeLocation": "Miami",
+      "startDate": "2021-05-06",
+      "remainingLeaves": 9,
+      "salary": {
+        "amount": 78000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "19",
+      "firstName": "Michael",
+      "lastName": "Lewis",
+      "birthYear": 1990,
+      "phoneNumber": "+1‑212‑555‑0299",
+      "department": "Product",
+      "officeLocation": "New York",
+      "startDate": "2019-09-14",
+      "remainingLeaves": 8,
+      "salary": {
+        "amount": 86000,
+        "currency": "$"
+      },
+      "dependents": []
+    },
+    {
+      "id": "20",
+      "firstName": "Harper",
+      "lastName": "Walker",
+      "birthYear": 1991,
+      "phoneNumber": "+1‑312‑555‑0300",
+      "department": "Marketing",
+      "officeLocation": "Chicago",
+      "startDate": "2022-01-21",
+      "remainingLeaves": 7,
+      "salary": {
+        "amount": 83000,
+        "currency": "$"
+      },
+      "dependents": [
+        {
+          "id": 18,
+          "firstName": "Luna",
+          "lastName": "Walker",
+          "birthYear": 2017,
+          "phoneNumber": "+1‑312‑555‑3001",
+          "relationship": "child"
+        },
+        {
+          "id": 19,
+          "firstName": "Owen",
+          "lastName": "Walker",
+          "birthYear": 2020,
+          "phoneNumber": "+1‑312‑555‑3002",
+          "relationship": "child"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "501",
+      "name": "Website Redesign",
+      "budget": 50000,
+      "status": "active"
+    },
+    {
+      "id": "502",
+      "name": "Mobile App Launch",
+      "budget": 80000,
+      "status": "active"
+    },
+    {
+      "id": "503",
+      "name": "AI Chatbot Pilot",
+      "budget": 45000,
+      "status": "planning"
+    },
+    {
+      "id": "504",
+      "name": "ERP Migration",
+      "budget": 120000,
+      "status": "active"
+    },
+    {
+      "id": "505",
+      "name": "Brand Refresh 2025",
+      "budget": 60000,
+      "status": "planning"
+    },
+    {
+      "id": "506",
+      "name": "Data Lake Build",
+      "budget": 110000,
+      "status": "active"
+    },
+    {
+      "id": "507",
+      "name": "Customer Portal",
+      "budget": 70000,
+      "status": "active"
+    },
+    {
+      "id": "508",
+      "name": "Marketing CRM Revamp",
+      "budget": 65000,
+      "status": "planning"
+    },
+    {
+      "id": "509",
+      "name": "Cyber‑Security Audit",
+      "budget": 30000,
+      "status": "active"
+    },
+    {
+      "id": "510",
+      "name": "Green Initiative",
+      "budget": 40000,
+      "status": "planning"
+    }
+  ],
+  "employeeProjects": [
+    {
+      "id": "1",
+      "employeeId": 1,
+      "projectId": 501,
+      "role": "Lead Dev"
+    },
+    {
+      "id": "2",
+      "employeeId": 1,
+      "projectId": 502,
+      "role": "Architect"
+    },
+    {
+      "id": "3",
+      "employeeId": 2,
+      "projectId": 508,
+      "role": "Campaign Lead"
+    },
+    {
+      "id": "4",
+      "employeeId": 2,
+      "projectId": 505,
+      "role": "Brand Owner"
+    },
+    {
+      "id": "5",
+      "employeeId": 3,
+      "projectId": 504,
+      "role": "Finance Lead"
+    },
+    {
+      "id": "6",
+      "employeeId": 3,
+      "projectId": 509,
+      "role": "Cost Controller"
+    },
+    {
+      "id": "7",
+      "employeeId": 4,
+      "projectId": 501,
+      "role": "UI Designer"
+    },
+    {
+      "id": "8",
+      "employeeId": 4,
+      "projectId": 505,
+      "role": "Visual Lead"
+    },
+    {
+      "id": "9",
+      "employeeId": 5,
+      "projectId": 507,
+      "role": "Sales Liaison"
+    },
+    {
+      "id": "10",
+      "employeeId": 6,
+      "projectId": 504,
+      "role": "HR Coordinator"
+    },
+    {
+      "id": "11",
+      "employeeId": 6,
+      "projectId": 510,
+      "role": "Change Manager"
+    },
+    {
+      "id": "12",
+      "employeeId": 7,
+      "projectId": 502,
+      "role": "Backend Dev"
+    },
+    {
+      "id": "13",
+      "employeeId": 8,
+      "projectId": 503,
+      "role": "Product Analyst"
+    },
+    {
+      "id": "14",
+      "employeeId": 8,
+      "projectId": 507,
+      "role": "UX Strategist"
+    },
+    {
+      "id": "15",
+      "employeeId": 9,
+      "projectId": 504,
+      "role": "Budget Owner"
+    },
+    {
+      "id": "16",
+      "employeeId": 10,
+      "projectId": 505,
+      "role": "Graphic Designer"
+    },
+    {
+      "id": "17",
+      "employeeId": 11,
+      "projectId": 506,
+      "role": "Tech Lead"
+    },
+    {
+      "id": "18",
+      "employeeId": 12,
+      "projectId": 502,
+      "role": "Marketing Lead"
+    },
+    {
+      "id": "19",
+      "employeeId": 13,
+      "projectId": 503,
+      "role": "Regional Manager"
+    },
+    {
+      "id": "20",
+      "employeeId": 14,
+      "projectId": 501,
+      "role": "UX Researcher"
+    },
+    {
+      "id": "21",
+      "employeeId": 15,
+      "projectId": 504,
+      "role": "CFO Delegate"
+    },
+    {
+      "id": "22",
+      "employeeId": 16,
+      "projectId": 510,
+      "role": "HR Rep"
+    },
+    {
+      "id": "23",
+      "employeeId": 17,
+      "projectId": 502,
+      "role": "QA Engineer"
+    },
+    {
+      "id": "24",
+      "employeeId": 18,
+      "projectId": 509,
+      "role": "Illustrator"
+    },
+    {
+      "id": "25",
+      "employeeId": 19,
+      "projectId": 503,
+      "role": "Product Manager"
+    },
+    {
+      "id": "26",
+      "employeeId": 20,
+      "projectId": 505,
+      "role": "Campaign Lead"
+    }
+  ]
+}
