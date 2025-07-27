@@ -22,6 +22,18 @@ import { useEmployees } from "@/api/useEmployees";
 import { formatDisplayName } from "@/utils/formatDisplayName";
 import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjectsDialog";
 import { useSettings } from "@/hooks/useSettings";
+import { useColumnVisibility } from "@/hooks/useColumnVisibility";
+import ColumnConfigButton from "../column-config/ColumnConfigButton";
+
+const initialColumnConfig = {
+  birthYear: true,
+  department: true,
+  officeLocation: true,
+  startDate: true,
+  remainingLeave: true,
+  salary: true,
+  dependents: true,
+};
 
 const EmployeeTable = () => {
   const { data: employees, isLoading } = useEmployees();
@@ -32,8 +44,12 @@ const EmployeeTable = () => {
   const open = !!selectedEmp;
   const handleClose = () => setSelectedEmp(null);
 
-  const columns: Column<Employee>[] = [
+  const { toggleColumn, isColumnVisible } =
+    useColumnVisibility(initialColumnConfig);
+
+  const allColumns: (Column<Employee> & { key?: string })[] = [
     {
+      key: "employee",
       header: "Employee",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -61,6 +77,7 @@ const EmployeeTable = () => {
       ),
     },
     {
+      key: "birthYear",
       header: "Birth Year",
       cell: (e) => (
         <Chip
@@ -73,6 +90,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
+      key: "department",
       header: "Department",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -82,6 +100,7 @@ const EmployeeTable = () => {
       ),
     },
     {
+      key: "officeLocation",
       header: "Office Location",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -91,6 +110,7 @@ const EmployeeTable = () => {
       ),
     },
     {
+      key: "startDate",
       header: "Start Date",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -101,6 +121,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
+      key: "remainingLeave",
       header: "Remaining Leave",
       cell: (e) => (
         <Chip
@@ -119,6 +140,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
+      key: "salary",
       header: "Salary",
       cell: (e) => (
         <Stack
@@ -136,6 +158,7 @@ const EmployeeTable = () => {
       align: "right",
     },
     {
+      key: "dependents",
       header: "Dependents",
       align: "center",
       cell: (e) =>
@@ -160,6 +183,7 @@ const EmployeeTable = () => {
         ),
     },
     {
+      key: "projects",
       header: "Projects",
       align: "center",
       cell: (e) => (
@@ -173,6 +197,14 @@ const EmployeeTable = () => {
       ),
     },
   ];
+
+  const columns = allColumns.filter((col, index) => {
+    // first and last always visible
+    if (index === 0 || index === allColumns.length - 1) {
+      return true;
+    } 
+    return col.key ? isColumnVisible(col.key) : true;
+  });
 
   if (isLoading) {
     return (
@@ -206,8 +238,19 @@ const EmployeeTable = () => {
     return null;
   }
 
+  const configurableColumns = allColumns.slice(1, -1).map((col) => ({
+    key: col.key!,
+    header: col.header,
+  }));
+
   return (
     <>
+      <ColumnConfigButton
+        configurableColumns={configurableColumns}
+        isColumnVisible={isColumnVisible}
+        onToggleColumn={toggleColumn}
+      />
+
       <Table
         columns={columns}
         data={employees}
