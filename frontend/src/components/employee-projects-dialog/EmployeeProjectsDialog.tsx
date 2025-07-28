@@ -11,58 +11,54 @@ import {
 } from "@mui/material";
 import type { Employee } from "@/types/Employee";
 import type { Project } from "@/types/Project";
-import { useEmployeeProjectDialog } from "./hooks/useEmployeeProjectDialog";
 import { RowItem } from "@/types/RowItem";
 import ProjectItem from "./ProjectItem";
 import EmptyProjectsState from "./EmptyProjectsState";
 import AddProjectForm from "./AddProjectForm";
+import { useProjectAssignments } from "@/hooks/use-project-assignments/useProjectAssignments";
+import { useSettings } from "@/hooks/useSettings";
 
 interface Props {
   open: boolean;
-  onClose: () => void;
   employee: Employee | null;
-  doItAllOnce?: boolean;
+  onClose: () => void;
 }
 
-const EmployeeProjectsDialog: FC<Props> = ({
-  open,
-  onClose,
-  employee,
-  doItAllOnce = false,
-}) => {
-  const [selectedProj, setSelectedProj] = useState<Project | null>(null);
+const EmployeeProjectsDialog: FC<Props> = ({ open, employee, onClose }) => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [role, setRole] = useState("");
+  const { isBatchModeOn } = useSettings();
 
   const {
     rows,
     unassignedProjects,
     isLoading,
-    queuedAdds,
-    queuedDeletes,
-    addPending,
-    delPending,
-    queueAdd,
-    removeOrDelete,
-    saveQueued,
-  } = useEmployeeProjectDialog(employee, doItAllOnce);
+    queuedAdditions,
+    queuedDeletions,
+    isAdditionPending,
+    isDeletionPending,
+    onAddProjectToQueue,
+    onRemoveOrDelete,
+    onSaveQueued,
+  } = useProjectAssignments(employee);
 
-  const handleAdd = () => {
-    if (selectedProj && role.trim()) {
-      queueAdd(selectedProj, role);
-      setSelectedProj(null);
+  const handleAddProject = () => {
+    if (selectedProject && role.trim()) {
+      onAddProjectToQueue(selectedProject, role);
+      setSelectedProject(null);
       setRole("");
     }
   };
 
-  const handleSave = async () => {
-    await saveQueued();
+  const handleSaveAssignments = async () => {
+    await onSaveQueued();
     onClose();
   };
 
   return (
     <Dialog
       open={open}
-      onClose={doItAllOnce ? onClose : handleSave}
+      onClose={isBatchModeOn ? onClose : handleSaveAssignments}
       keepMounted={false}
       maxWidth="md"
       fullWidth
@@ -83,49 +79,48 @@ const EmployeeProjectsDialog: FC<Props> = ({
               <ProjectItem
                 key={row.id}
                 row={row}
-                queuedAdds={queuedAdds}
-                onRemove={removeOrDelete}
-                delPending={delPending}
+                queuedAdds={queuedAdditions}
+                onRemove={onRemoveOrDelete}
+                delPending={isDeletionPending}
               />
             ))}
 
             <AddProjectForm
               unassignedProjects={unassignedProjects}
-              selectedProj={selectedProj}
+              selectedProject={selectedProject}
               role={role}
-              addPending={addPending}
-              doItAllOnce={doItAllOnce}
-              onProjectChange={setSelectedProj}
+              isAdditionPending={isAdditionPending}
+              onProjectChange={setSelectedProject}
               onRoleChange={setRole}
-              onAdd={handleAdd}
+              onAdd={handleAddProject}
             />
           </Stack>
         )}
       </DialogContent>
 
       <DialogActions>
-        {doItAllOnce && (
+        {isBatchModeOn && (
           <Typography
             variant="caption"
             sx={{ mr: "auto", pl: 2 }}
             color="text.secondary"
           >
-            Pending: +{queuedAdds.length} / −{queuedDeletes.length}
+            Pending: +{queuedAdditions.length} / −{queuedDeletions.length}
           </Typography>
         )}
-        
-        <Button onClick={onClose} disabled={addPending || delPending}>
-          {doItAllOnce ? "Cancel" : "Close"}
+
+        <Button onClick={onClose} disabled={isAdditionPending || isDeletionPending}>
+          {isBatchModeOn ? "Cancel" : "Close"}
         </Button>
 
-        {doItAllOnce && (
+        {isBatchModeOn && (
           <Button
             variant="contained"
-            onClick={() => void handleSave()}
+            onClick={() => void handleSaveAssignments()}
             disabled={
-              queuedAdds.length + queuedDeletes.length === 0 ||
-              addPending ||
-              delPending
+              queuedAdditions.length + queuedDeletions.length === 0 ||
+              isAdditionPending ||
+              isDeletionPending
             }
           >
             Save

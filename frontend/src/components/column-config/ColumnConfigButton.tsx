@@ -11,7 +11,7 @@ import {
 import { Settings as SettingsIcon } from "@mui/icons-material";
 
 export interface ConfigurableColumn {
-  key: string;
+  columnKey: string;
   header: string;
 }
 
@@ -71,11 +71,11 @@ const ColumnConfigButton = ({
           </Typography>
           {configurableColumns.map((col) => (
             <FormControlLabel
-              key={col.key}
+              key={col.columnKey}
               control={
                 <Checkbox
-                  checked={isColumnVisible(col.key)}
-                  onChange={() => onToggleColumn(col.key)}
+                  checked={isColumnVisible(col.columnKey)}
+                  onChange={() => onToggleColumn(col.columnKey)}
                   size="small"
                 />
               }

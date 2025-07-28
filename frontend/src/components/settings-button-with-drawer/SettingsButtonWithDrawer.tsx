@@ -18,7 +18,7 @@ import { useSettings } from "@/hooks/useSettings";
 
 const SettingsButtonWithDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { doItAllOnce, setDoItAllOnce } = useSettings();
+  const { isBatchModeOn, onChangeBatchMode } = useSettings();
 
   const handleOpenDrawer = () => setIsOpen(true);
   const handleCloseDrawer = () => setIsOpen(false);
@@ -70,8 +70,8 @@ const SettingsButtonWithDrawer = () => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={doItAllOnce}
-                  onChange={(e) => setDoItAllOnce(e.target.checked)}
+                  checked={isBatchModeOn}
+                  onChange={(e) => onChangeBatchMode(e.target.checked)}
                   color="primary"
                 />
               }

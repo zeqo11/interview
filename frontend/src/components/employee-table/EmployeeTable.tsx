@@ -21,7 +21,6 @@ import Table, { Column } from "@/common/Table";
 import { useEmployees } from "@/api/useEmployees";
 import { formatDisplayName } from "@/utils/formatDisplayName";
 import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjectsDialog";
-import { useSettings } from "@/hooks/useSettings";
 import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import ColumnConfigButton from "../column-config/ColumnConfigButton";
 
@@ -37,7 +36,6 @@ const initialColumnConfig = {
 
 const EmployeeTable = () => {
   const { data: employees, isLoading } = useEmployees();
-  const { doItAllOnce } = useSettings();
   const theme = useTheme();
 
   const [selectedEmp, setSelectedEmp] = useState<Employee | null>(null);
@@ -47,9 +45,9 @@ const EmployeeTable = () => {
   const { toggleColumn, isColumnVisible } =
     useColumnVisibility(initialColumnConfig);
 
-  const allColumns: (Column<Employee> & { key?: string })[] = [
+  const allColumns: (Column<Employee> & { columnKey?: string })[] = [
     {
-      key: "employee",
+      columnKey: "employee",
       header: "Employee",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -77,7 +75,7 @@ const EmployeeTable = () => {
       ),
     },
     {
-      key: "birthYear",
+      columnKey: "birthYear",
       header: "Birth Year",
       cell: (e) => (
         <Chip
@@ -90,7 +88,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
-      key: "department",
+      columnKey: "department",
       header: "Department",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -100,7 +98,7 @@ const EmployeeTable = () => {
       ),
     },
     {
-      key: "officeLocation",
+      columnKey: "officeLocation",
       header: "Office Location",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -110,7 +108,7 @@ const EmployeeTable = () => {
       ),
     },
     {
-      key: "startDate",
+      columnKey: "startDate",
       header: "Start Date",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -121,7 +119,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
-      key: "remainingLeave",
+      columnKey: "remainingLeave",
       header: "Remaining Leave",
       cell: (e) => (
         <Chip
@@ -140,7 +138,7 @@ const EmployeeTable = () => {
       align: "center",
     },
     {
-      key: "salary",
+      columnKey: "salary",
       header: "Salary",
       cell: (e) => (
         <Stack
@@ -158,7 +156,7 @@ const EmployeeTable = () => {
       align: "right",
     },
     {
-      key: "dependents",
+      columnKey: "dependents",
       header: "Dependents",
       align: "center",
       cell: (e) =>
@@ -183,7 +181,7 @@ const EmployeeTable = () => {
         ),
     },
     {
-      key: "projects",
+      columnKey: "projects",
       header: "Projects",
       align: "center",
       cell: (e) => (
@@ -202,8 +200,9 @@ const EmployeeTable = () => {
     // first and last always visible
     if (index === 0 || index === allColumns.length - 1) {
       return true;
-    } 
-    return col.key ? isColumnVisible(col.key) : true;
+    }
+
+    return col.columnKey ? isColumnVisible(col.columnKey) : true;
   });
 
   if (isLoading) {
@@ -239,7 +238,7 @@ const EmployeeTable = () => {
   }
 
   const configurableColumns = allColumns.slice(1, -1).map((col) => ({
-    key: col.key!,
+    columnKey: col.columnKey!,
     header: col.header,
   }));
 
@@ -258,14 +257,11 @@ const EmployeeTable = () => {
         initialRowsPerPage={10}
       />
 
-      {selectedEmp && (
-        <EmployeeProjectsDialog
-          open={open}
-          onClose={handleClose}
-          employee={selectedEmp}
-          doItAllOnce={doItAllOnce}
-        />
-      )}
+      <EmployeeProjectsDialog
+        open={open}
+        onClose={handleClose}
+        employee={selectedEmp}
+      />
     </>
   );
 };
