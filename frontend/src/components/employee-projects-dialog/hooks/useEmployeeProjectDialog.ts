@@ -11,12 +11,14 @@ import { queueReducer, initialState } from "../queueReducer";
 import { getAssigned, getAssignedIds, buildRows } from "../selectors";
 import { RowItem } from "@/types/RowItem";
 import { Project } from "@/types/Project";
+import { useNotification } from "@/hooks/useNotification";
 
 export const useEmployeeProjectDialog = (
   employee: Employee | null,
   doItAllOnce = false
 ) => {
   const [state, dispatch] = useReducer(queueReducer, initialState);
+  const { showSuccess, showError } = useNotification();
 
   const { data: projects = [], isLoading: projLoading } = useProjects();
   const { data: employeeProjects = [], isLoading: epLoading } =
@@ -122,10 +124,24 @@ export const useEmployeeProjectDialog = (
         ),
         ...queuedDeletes.map((id) => delMutation.mutateAsync(id)),
       ]);
+      
+      const addCount = queuedAdds.length;
+      const deleteCount = queuedDeletes.length;
+      
+      if (addCount > 0 && deleteCount > 0) {
+        showSuccess(`Successfully added ${addCount} and removed ${deleteCount} project assignments`);
+      } else if (addCount > 0) {
+        showSuccess(`Successfully added ${addCount} project assignment${addCount > 1 ? 's' : ''}`);
+      } else if (deleteCount > 0) {
+        showSuccess(`Successfully removed ${deleteCount} project assignment${deleteCount > 1 ? 's' : ''}`);
+      }
+    } catch (error) {
+      showError('Failed to save project assignments. Please try again.');
+      throw error;
     } finally {
       dispatch({ type: "reset" });
     }
-  }, [doItAllOnce, queuedAdds, queuedDeletes, addMutation, delMutation]);
+  }, [doItAllOnce, queuedAdds, queuedDeletes, addMutation, delMutation, showSuccess, showError]);
 
   useEffect(() => {
     dispatch({ type: "reset" });
