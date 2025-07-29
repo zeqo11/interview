@@ -4,7 +4,7 @@ import PageHeader from "../components/page-header/PageHeader";
 
 const EmployeesPage = () => {
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <PageHeader />
 
       <EmployeeTable />

@@ -33,7 +33,8 @@ const AddProjectForm: FC<AddProjectFormProps> = ({
   onAdd,
 }) => {
   const { isBatchModeOn } = useSettings();
-
+  const isAddButtonDisabled = !selectedProject || !role.trim() || (isAdditionPending && !isBatchModeOn)
+  
   return (
     <Box
       sx={{
@@ -42,10 +43,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({
         border: "2px dashed",
         borderColor: "primary.light",
         borderRadius: 2,
-        backgroundColor: (theme: Theme) =>
-          theme.palette.mode === "light"
-            ? "rgba(99, 102, 241, 0.01)"
-            : "rgba(129, 140, 248, 0.02)",
       }}
     >
       <Typography
@@ -89,18 +86,13 @@ const AddProjectForm: FC<AddProjectFormProps> = ({
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          disabled={
-            !selectedProject || !role.trim() || (isAdditionPending && !isBatchModeOn)
-          }
+          disabled={isAddButtonDisabled}
           onClick={onAdd}
           size="small"
           sx={{
-            minWidth: 100,
             background: (theme: Theme) => theme.custom.gradients.primary,
-            "&:hover": {
-              background: (theme: Theme) => theme.custom.gradients.primary,
-              transform: "translateY(-1px)",
-              boxShadow: 2,
+            "&:disabled": {
+              background: (theme: Theme) => theme.palette.action.disabledBackground,
             },
           }}
         >

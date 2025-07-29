@@ -38,7 +38,6 @@ const PageHeader = () => {
               color: "white",
               fontWeight: 700,
               mb: 1,
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)",
             }}
           >
             Employee Overview

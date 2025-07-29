@@ -64,7 +64,7 @@ function Table<T>({
       }}
     >
       <Box sx={{ overflowX: "auto", maxWidth: "100%" }}>
-        <MuiTable sx={{ minWidth: 1400, tableLayout: "auto" }}>
+        <MuiTable sx={{  tableLayout: "auto" }}>
           <TableHead>
             <TableRow
               sx={{
