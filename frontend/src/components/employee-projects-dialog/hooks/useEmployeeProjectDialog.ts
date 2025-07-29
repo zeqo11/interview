@@ -1,21 +1,16 @@
 import { useReducer, useMemo, useCallback, useEffect } from "react";
-
 import {
-    useProjects,
-    useEmployeeProjects,
-    useAddEmployeeProject,
-    useDeleteEmployeeProject,
+  useProjects,
+  useEmployeeProjects,
+  useAddEmployeeProject,
+  useDeleteEmployeeProject,
 } from "@/api/useProjects";
-
 import type { Employee } from "@/types/Employee";
-
 import { generateTempId } from "@/utils/generateTempId";
-
 import { queueReducer, initialState } from "../queueReducer";
 import { getAssigned, getAssignedIds, buildRows } from "../selectors";
 import { RowItem } from "@/types/RowItem";
-
-export type ProjectLike = { id: string } | string;
+import { Project } from "@/types/Project";
 
 export const useEmployeeProjectDialog = (
   employee: Employee | null,
@@ -34,8 +29,8 @@ export const useEmployeeProjectDialog = (
   const delMutation = useDeleteEmployeeProject();
 
   const assigned = useMemo(
-    () => getAssigned(employeeId, employeeProjects, state.queuedDeletes),
-    [employeeId, employeeProjects, state.queuedDeletes]
+    () => getAssigned(employeeId, employeeProjects),
+    [employeeId, employeeProjects]
   );
 
   const assignedIds = useMemo(
@@ -54,18 +49,27 @@ export const useEmployeeProjectDialog = (
   );
 
   const rows = useMemo(
-    () => buildRows(assigned, state.queuedAdds, projectNameById),
-    [assigned, state.queuedAdds, projectNameById]
+    () =>
+      buildRows(
+        assigned,
+        state.queuedAdds,
+        state.queuedDeletes,
+        projectNameById
+      ),
+    [assigned, state.queuedAdds, state.queuedDeletes, projectNameById]
   );
 
   const queueAdd = useCallback(
-    (projectLike: ProjectLike, role: string) => {
-      if (!employee) return;
+    (project: Project, role: string) => {
+      if (!employee) {
+        return;
+      }
 
-      const projectId =
-        typeof projectLike === "string" ? projectLike : projectLike.id;
+      const projectId = project.id;
 
-      if (assignedIds.has(projectId)) return;
+      if (assignedIds.has(projectId)) {
+        return;
+      }
 
       const cleanRole = role.trim();
 

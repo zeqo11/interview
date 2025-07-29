@@ -4,4 +4,5 @@ export interface RowItem {
   projectName: string;
   role: string;
   queued: boolean;
+  isDeleted: boolean;
 }
