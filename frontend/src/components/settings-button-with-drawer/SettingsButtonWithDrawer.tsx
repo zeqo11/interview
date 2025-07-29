@@ -26,7 +26,7 @@ const SettingsButtonWithDrawer = () => {
   return (
     <>
       <Tooltip title="Settings">
-        <IconButton onClick={handleOpenDrawer}>
+        <IconButton onClick={handleOpenDrawer} sx={{ color: "white" }}>
           <SettingsIcon />
         </IconButton>
       </Tooltip>
