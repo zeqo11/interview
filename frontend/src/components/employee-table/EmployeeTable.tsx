@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
   Avatar,
-  AvatarGroup,
   Box,
   Button,
   CircularProgress,
   Stack,
-  Tooltip,
   Typography,
   Chip,
   useTheme,
@@ -19,10 +17,10 @@ import {
 import type { Employee } from "@/types/Employee";
 import Table, { Column } from "@/common/Table";
 import { useEmployees } from "@/api/useEmployees";
-import { formatDisplayName } from "@/utils/formatDisplayName";
 import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjectsDialog";
 import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import ColumnConfigButton from "../column-config/ColumnConfigButton";
+import { DependentsCell } from "@/components/employee-table/DependentsCell";
 
 const initialColumnConfig = {
   birthYear: true,
@@ -49,6 +47,7 @@ const EmployeeTable = () => {
     {
       columnKey: "employee",
       header: "Employee",
+      align: "left",
       cell: (e) => (
         <Stack direction="row" alignItems="center" spacing={2}>
           <Avatar
@@ -85,7 +84,6 @@ const EmployeeTable = () => {
           sx={{ fontWeight: 500 }}
         />
       ),
-      align: "center",
     },
     {
       columnKey: "department",
@@ -116,74 +114,49 @@ const EmployeeTable = () => {
           <Typography>{new Date(e.startDate).toLocaleDateString()}</Typography>
         </Stack>
       ),
-      align: "center",
     },
     {
       columnKey: "remainingLeave",
       header: "Remaining Leave",
       cell: (e) => (
-        <Chip
-          label={`${e.remainingLeaves} days`}
-          size="small"
-          color={
-            e.remainingLeaves > 10
-              ? "success"
-              : e.remainingLeaves > 5
-              ? "warning"
-              : "error"
-          }
-          sx={{ fontWeight: 500 }}
-        />
+        <Stack direction="row" display="flex" alignItems="center" spacing={1}>
+          <Chip
+            label={`${e.remainingLeaves} days`}
+            size="small"
+            color={
+              e.remainingLeaves > 10
+                ? "success"
+                : e.remainingLeaves > 5
+                ? "warning"
+                : "error"
+            }
+            sx={{ fontWeight: 500 }}
+          />
+        </Stack>
       ),
-      align: "center",
     },
     {
       columnKey: "salary",
       header: "Salary",
       cell: (e) => (
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={1}
-          justifyContent="flex-end"
-        >
+        <Stack direction="row" display="flex" alignItems="center" spacing={1}>
           <Typography fontWeight={600} color="primary.main">
             {e.salary.currency}
             {e.salary.amount.toLocaleString("tr-TR")}
           </Typography>
         </Stack>
       ),
-      align: "right",
     },
     {
       columnKey: "dependents",
       header: "Dependents",
       align: "center",
-      cell: (e) =>
-        e.dependents.length ? (
-          <AvatarGroup max={4}>
-            {e.dependents.map((d) => (
-              <Tooltip key={d.id} title={formatDisplayName(d)}>
-                <Avatar>
-                  {d.firstName[0]}
-                  {d.lastName[0]}
-                </Avatar>
-              </Tooltip>
-            ))}
-          </AvatarGroup>
-        ) : (
-          <Chip
-            label="No dependents"
-            size="small"
-            variant="outlined"
-            color="default"
-          />
-        ),
+      cell: (e) => <DependentsCell dependents={e.dependents} />,
     },
     {
       columnKey: "projects",
       header: "Projects",
-      align: "center",
+      align: "right",
       cell: (e) => (
         <Button
           size="small"
