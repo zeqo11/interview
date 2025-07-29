@@ -1,8 +1,8 @@
 import { createContext, useState, ReactNode } from 'react';
 
 interface SettingsContextType {
-  doItAllOnce: boolean;
-  setDoItAllOnce: (value: boolean) => void;
+  isBatchModeOn: boolean;
+  onChangeBatchMode: (value: boolean) => void;
 }
 
 export const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -12,10 +12,10 @@ interface SettingsProviderProps {
 }
 
 export const SettingsProvider = ({ children }: SettingsProviderProps) => {
-  const [doItAllOnce, setDoItAllOnce] = useState(true);
+  const [isBatchModeOn, setIsBatchModeOn] = useState(true);
 
   return (
-    <SettingsContext.Provider value={{ doItAllOnce, setDoItAllOnce }}>
+    <SettingsContext.Provider value={{ isBatchModeOn, onChangeBatchMode: setIsBatchModeOn }}>
       {children}
     </SettingsContext.Provider>
   );
