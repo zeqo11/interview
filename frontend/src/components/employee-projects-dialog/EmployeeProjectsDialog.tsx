@@ -7,7 +7,6 @@ import {
   Stack,
   Typography,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import type { Employee } from "@/types/Employee";
 import type { Project } from "@/types/Project";
@@ -17,6 +16,7 @@ import EmptyProjectsState from "./EmptyProjectsState";
 import AddProjectForm from "./AddProjectForm";
 import { useProjectAssignments } from "@/hooks/use-project-assignments/useProjectAssignments";
 import { useSettings } from "@/hooks/useSettings";
+import ProjectsSkeleton from "@/components/skeletons/ProjectsSkeleton";
 
 interface Props {
   open: boolean;
@@ -70,7 +70,7 @@ const EmployeeProjectsDialog: FC<Props> = ({ open, employee, onClose }) => {
 
       <DialogContent dividers sx={{ pt: 2 }}>
         {isLoading ? (
-          <CircularProgress />
+          <ProjectsSkeleton items={5} />
         ) : (
           <Stack spacing={2}>
             {rows.length === 0 && <EmptyProjectsState />}
