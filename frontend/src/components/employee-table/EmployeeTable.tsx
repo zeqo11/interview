@@ -3,11 +3,10 @@ import {
   Avatar,
   Box,
   Button,
-  CircularProgress,
   Stack,
   Typography,
   Chip,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import {
   Room as RoomIcon,
@@ -21,6 +20,7 @@ import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjects
 import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import ColumnConfigButton from "../column-config/ColumnConfigButton";
 import { DependentsCell } from "@/components/employee-table/DependentsCell";
+import TableSkeleton from "@/components/skeletons/TableSkeleton";
 
 const initialColumnConfig = {
   birthYear: true,
@@ -179,31 +179,7 @@ const EmployeeTable = () => {
   });
 
   if (isLoading) {
-    return (
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        py={8}
-        sx={{
-          background: theme.palette.background.paper,
-          borderRadius: 2,
-          border: `1px solid ${theme.palette.divider}`,
-        }}
-      >
-        <CircularProgress
-          size={48}
-          sx={{
-            color: theme.palette.primary.main,
-            mb: 2,
-          }}
-        />
-        <Typography variant="body2" color="text.secondary">
-          Loading employee data...
-        </Typography>
-      </Box>
-    );
+    return <TableSkeleton rows={10} columns={6} />;
   }
 
   if (!employees) {
@@ -230,11 +206,13 @@ const EmployeeTable = () => {
         initialRowsPerPage={10}
       />
 
-      <EmployeeProjectsDialog
-        open={open}
-        onClose={handleClose}
-        employee={selectedEmp}
-      />
+      {selectedEmp && (
+        <EmployeeProjectsDialog
+          open={open}
+          onClose={handleClose}
+          employee={selectedEmp}
+        />
+      )}
     </>
   );
 };
