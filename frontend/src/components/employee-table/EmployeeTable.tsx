@@ -21,6 +21,7 @@ import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import ColumnConfigButton from "../column-config/ColumnConfigButton";
 import { DependentsCell } from "@/components/employee-table/DependentsCell";
 import TableSkeleton from "@/components/skeletons/TableSkeleton";
+import EmptyScreen from "@/components/empty-screen/EmptyScreen";
 
 const initialColumnConfig = {
   birthYear: true,
@@ -33,7 +34,7 @@ const initialColumnConfig = {
 };
 
 const EmployeeTable = () => {
-  const { data: employees, isLoading } = useEmployees();
+  const { data: employees, isLoading, error } = useEmployees();
   const theme = useTheme();
 
   const [selectedEmp, setSelectedEmp] = useState<Employee | null>(null);
@@ -182,8 +183,22 @@ const EmployeeTable = () => {
     return <TableSkeleton rows={10} columns={6} />;
   }
 
-  if (!employees) {
-    return null;
+  if (error) {
+    return (
+      <EmptyScreen
+        title="Failed to load employees"
+        description="We couldn't load the employee data. Please check your connection and try again."
+      />
+    );
+  }
+
+  if (!employees || employees.length === 0) {
+    return (
+      <EmptyScreen
+        title="No employees found"
+        description="We couldn't find any employees in the system."
+      />
+    );
   }
 
   const configurableColumns = allColumns.slice(1, -1).map((col) => ({
