@@ -19,9 +19,9 @@
           "id": "1",
           "firstName": "Lily",
           "lastName": "Smith",
-          "birthYear": 2015,
+          "birthYear": 1980,
           "phoneNumber": "+1‑212‑555‑1101",
-          "relationship": "child"
+          "relationship": "spouse"
         },
         {
           "id": "2",
@@ -42,7 +42,7 @@
       "department": "Marketing",
       "officeLocation": "San Francisco",
       "startDate": "2019-07-01",
-      "remainingLeaves": 8,
+      "remainingLeaves": 3,
       "salary": {
         "amount": 87000,
         "currency": "$"
@@ -52,9 +52,9 @@
           "id": "3",
           "firstName": "Grace",
           "lastName": "Johnson",
-          "birthYear": 2020,
+          "birthYear": 1990,
           "phoneNumber": "+1‑415‑555‑1201",
-          "relationship": "child"
+          "relationship": "other"
         }
       ]
     },
@@ -70,7 +70,7 @@
       "remainingLeaves": 12,
       "salary": {
         "amount": 97000,
-        "currency": "$"
+        "currency": "€"
       },
       "dependents": [
         {
@@ -103,7 +103,7 @@
       "remainingLeaves": 9,
       "salary": {
         "amount": 79000,
-        "currency": "$"
+        "currency": "£"
       },
       "dependents": []
     },
@@ -126,9 +126,9 @@
           "id": "6",
           "firstName": "Noel",
           "lastName": "Jones",
-          "birthYear": 2016,
+          "birthYear": 1960,
           "phoneNumber": "+1‑213‑555‑1501",
-          "relationship": "child"
+          "relationship": "parent"
         }
       ]
     },
@@ -144,7 +144,7 @@
       "remainingLeaves": 13,
       "salary": {
         "amount": 78000,
-        "currency": "$"
+        "currency": "£"
       },
       "dependents": [
         {
@@ -177,7 +177,7 @@
       "remainingLeaves": 7,
       "salary": {
         "amount": 98000,
-        "currency": "$"
+        "currency": "€"
       },
       "dependents": []
     },
@@ -206,7 +206,7 @@
       "department": "Finance",
       "officeLocation": "Miami",
       "startDate": "2016-04-22",
-      "remainingLeaves": 14,
+      "remainingLeaves": 1,
       "salary": {
         "amount": 99000,
         "currency": "$"
@@ -241,7 +241,7 @@
       "remainingLeaves": 10,
       "salary": {
         "amount": 110000,
-        "currency": "$"
+        "currency": "€"
       },
       "dependents": []
     },
@@ -289,7 +289,7 @@
       "remainingLeaves": 7,
       "salary": {
         "amount": 82000,
-        "currency": "$"
+        "currency": "€"
       },
       "dependents": []
     },
@@ -337,7 +337,7 @@
       "remainingLeaves": 13,
       "salary": {
         "amount": 107000,
-        "currency": "$"
+        "currency": "€"
       },
       "dependents": []
     },
