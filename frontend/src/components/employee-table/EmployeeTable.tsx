@@ -21,9 +21,11 @@ import Table, { Column } from "@/common/Table";
 import { useEmployees } from "@/api/useEmployees";
 import { formatDisplayName } from "@/utils/formatDisplayName";
 import EmployeeProjectsDialog from "../employee-projects-dialog/EmployeeProjectsDialog";
+import { useSettings } from "@/hooks/useSettings";
 
 const EmployeeTable = () => {
   const { data: employees, isLoading } = useEmployees();
+  const { doItAllOnce } = useSettings();
   const theme = useTheme();
 
   const [selectedEmp, setSelectedEmp] = useState<Employee | null>(null);
@@ -218,7 +220,7 @@ const EmployeeTable = () => {
           open={open}
           onClose={handleClose}
           employee={selectedEmp}
-          doItAllOnce={true}
+          doItAllOnce={doItAllOnce}
         />
       )}
     </>
